@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADHS im Kindergarten und in der Schule</title>
+    <style>
+        :root {
+            --deep-blue: #355e77;
+            --sky: #95d0ed;
+            --soft-blue: #f7fcff;
+            --mustard: #eecb79;
+            --rose: #f29aa0;
+            --mint: #8bcfbe;
+            --lavender: #9b8ee8;
+            --coral: #f1a886;
+            --peach: #f7d8a8;
+            --cream: #fffaf2;
+            --text: #3b5568;
+            --shadow: rgba(53, 94, 119, 0.14);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(149, 208, 237, 0.24), transparent 24%),
+                radial-gradient(circle at bottom right, rgba(155, 142, 232, 0.16), transparent 24%),
+                linear-gradient(135deg, #fffaf5 0%, #f8fcff 48%, #fff7fa 100%);
+        }
+
+        .skip-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 30;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--deep-blue);
+            padding: 0.6rem 0.85rem;
+            border-radius: 999px;
+            border: 1px solid rgba(53,94,119,0.15);
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(53,94,119,0.1);
+        }
+
+        .section-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            margin-left: 0.5rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--deep-blue);
+            text-decoration: none;
+            font-size: 0.95rem;
+            border: 1px solid rgba(53,94,119,0.14);
+            opacity: 0.7;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .section-link:hover,
+        .section-link:focus {
+            opacity: 1;
+            transform: translateY(-1px);
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 100%;
+            opacity: 0.55;
+            pointer-events: none;
+        }
+
+        body::before {
+            width: 240px;
+            height: 240px;
+            top: -80px;
+            left: -80px;
+            background: radial-gradient(circle, rgba(255, 179, 71, 0.42), transparent 58%);
+        }
+
+        body::after {
+            width: 360px;
+            height: 360px;
+            bottom: -110px;
+            right: -120px;
+            background: radial-gradient(circle, rgba(124, 199, 255, 0.36), transparent 56%);
+        }
+
+        header {
+            background: linear-gradient(135deg, #f2b08d 0%, #f7d8a8 32%, #e1c6ff 68%, #a8d9c8 100%);
+            color: var(--deep-blue);
+            padding: 3.3rem 1.5rem 4.2rem;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+            box-shadow: inset 0 -10px 30px rgba(255, 255, 255, 0.12);
+        }
+
+        .hero-shell {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 1.6rem;
+            align-items: center;
+            max-width: 1160px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding: 0.55rem 0.85rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.26);
+            backdrop-filter: blur(6px);
+            width: fit-content;
+        }
+
+        .brand-mark {
+            width: 2.35rem;
+            height: 2.35rem;
+            border-radius: 50% 50% 45% 55%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(242,154,160,0.8));
+            display: grid;
+            place-items: center;
+            color: white;
+            font-weight: 800;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+            font-size: 1rem;
+        }
+
+        .brand-text {
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            margin-bottom: 1rem;
+            padding: 0.6rem 1rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(6px);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            animation: float 3.2s ease-in-out infinite;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            letter-spacing: -0.03em;
+            text-shadow: 0 10px 35px rgba(0, 0, 0, 0.16);
+        }
+
+        .intro {
+            max-width: 790px;
+            margin: 1.2rem 0 0;
+            padding: 0.99rem 1.2rem;
+            font-size: 1.10rem;
+            color: rgba(75, 1, 62, 0.699);
+            line-height: 1.8;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: 999px;
+            backdrop-filter: blur(4px);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.1rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: var(--deep-blue);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.32);
+            color: var(--deep-blue);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+        }
+
+        .hero-illustration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            min-height: 260px;
+        }
+
+        .illustration-card {
+            width: min(100%, 320px);
+            padding: 1.2rem;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.26);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+            animation: float 4s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .illustration-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.16), transparent 60%);
+            pointer-events: none;
+        }
+
+        .illustration-card::after {
+            content: '✦';
+            position: absolute;
+            top: 0.5rem;
+            right: 0.7rem;
+            font-size: 1.15rem;
+            color: var(--rose);
+            opacity: 0.85;
+        }
+
+        .illustration-card .cloud {
+            display: inline-block;
+            width: 1.1rem;
+            height: 0.65rem;
+            border-radius: 999px;
+            background: white;
+            margin-right: 0.25rem;
+            opacity: 0.9;
+        }
+
+        .illustration-card .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 0.35rem;
+        }
+
+        .illustration-card .row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin: 0.5rem 0;
+            padding: 0.5rem 0.65rem;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.32);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+        }
+
+        .illustration-card .icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            display: inline-grid;
+            place-items: center;
+            background: linear-gradient(135deg, rgba(242,154,160,0.25), rgba(149,208,237,0.25));
+            font-size: 0.9rem;
+        }
+
+        nav {
+            max-width: 1040px;
+            margin: -2.2rem auto 1.2rem;
+            padding: 1.2rem 1.4rem;
+            background: rgba(255, 252, 247, 0.92);
+            border-radius: 24px;
+            box-shadow: 0 18px 42px rgba(53, 94, 119, 0.1);
+            border: 1px solid rgba(53, 94, 119, 0.08);
+            position: sticky;
+            top: 1rem;
+            z-index: 20;
+            backdrop-filter: blur(12px);
+        }
+
+        nav h2 {
+            margin: 0 0 0.9rem;
+            font-size: 1.2rem;
+            color: var(--deep-blue);
+        }
+
+        nav ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+            gap: 0.8rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            text-decoration: none;
+            background: linear-gradient(135deg, rgba(125, 191, 232, 0.22), rgba(244, 185, 66, 0.2));
+            padding: 0.92rem 1rem;
+            border-radius: 999px;
+            font-weight: 700;
+            color: var(--deep-blue);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        }
+
+        nav a::before {
+            content: '✦';
+            margin-right: 0.5rem;
+            color: var(--rose);
+        }
+
+        nav a:hover,
+        nav a.active {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(23, 70, 108, 0.14);
+            background: linear-gradient(135deg, rgba(125, 191, 232, 0.33), rgba(244, 185, 66, 0.27));
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.2rem 1.4rem 3rem;
+        }
+
+        article {
+            background: linear-gradient(135deg, rgba(255, 250, 242, 0.97) 0%, rgba(247, 252, 255, 0.97) 100%);
+            border: 1px solid rgba(53, 94, 119, 0.08);
+            border-radius: 28px;
+            padding: 1.5rem 1.4rem 1.35rem;
+            margin-bottom: 1.1rem;
+            box-shadow: 0 16px 38px rgba(53, 94, 119, 0.07);
+            position: relative;
+            overflow: hidden;
+        }
+
+        article::before {
+            content: '';
+            position: absolute;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 179, 71, 0.18), transparent 72%);
+            top: -42px;
+            right: -45px;
+            z-index: 0;
+        }
+
+        article h2 {
+            color: var(--deep-blue);
+            margin-top: 0;
+            border-bottom: 3px dashed rgba(124, 199, 255, 0.45);
+            padding-bottom: 0.55rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        section h3 {
+            color: var(--lavender);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(242, 154, 160, 0.22), rgba(149, 208, 237, 0.24));
+            font-size: 1rem;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
+        }
+
+        .grid {
+            display: grid;
+            gap: 1.2rem;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .card {
+            background: linear-gradient(145deg, rgba(255, 248, 235, 0.96) 0%, rgba(242, 249, 255, 0.96) 100%);
+            padding: 1.2rem 1.15rem 1.1rem;
+            border-radius: 22px;
+            border: 1px solid rgba(125, 191, 232, 0.2);
+            box-shadow: 0 12px 26px rgba(53, 94, 119, 0.06);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            min-height: 200px;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(23, 70, 108, 0.12);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.55rem;
+        }
+
+        .card-dots {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .card-dot {
+            width: 0.7rem;
+            height: 0.7rem;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.35);
+        }
+
+        .card-dot.rose { background: var(--rose); }
+        .card-dot.mint { background: var(--mint); }
+        .card-dot.mustard { background: var(--mustard); }
+
+        .card-note {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            color: var(--deep-blue);
+            background: rgba(255,255,255,0.7);
+            border: 1px solid rgba(23,70,108,0.08);
+            border-radius: 999px;
+            padding: 0.25rem 0.55rem;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(53, 94, 119, 0.1);
+            border-radius: 28px;
+            padding: 1.4rem;
+            box-shadow: 0 16px 34px rgba(53, 94, 119, 0.08);
+            text-align: center;
+        }
+
+        .video-card video {
+            width: 100%;
+            border-radius: 20px;
+            max-height: 420px;
+            box-shadow: 0 12px 30px rgba(53, 94, 119, 0.09);
+        }
+
+        .video-card h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--deep-blue);
+        }
+
+        .video-card p {
+            margin: 0.8rem auto 0;
+            max-width: 760px;
+            color: rgba(55, 85, 104, 0.92);
+        }
+
+        .card p {
+            margin: 0;
+            padding: 1rem 1.1rem;
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(53, 94, 119, 0.08);
+            border-radius: 18px;
+            line-height: 1.75;
+        }
+
+        .card p + p {
+            margin-top: 1rem;
+            border-top: 1px dashed rgba(53, 94, 119, 0.15);
+            padding-top: 1rem;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 15% 18%, rgba(242, 154, 160, 0.14) 0 7px, transparent 8px),
+                radial-gradient(circle at 87% 16%, rgba(139, 207, 190, 0.16) 0 8px, transparent 9px),
+                radial-gradient(circle at 82% 82%, rgba(238, 203, 121, 0.14) 0 6px, transparent 7px);
+            pointer-events: none;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.55), transparent 68%);
+            top: -28px;
+            right: -26px;
+            pointer-events: none;
+        }
+
+        .card-figure {
+            position: absolute;
+            bottom: 0.65rem;
+            right: 0.8rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(125,191,232,0.18));
+            border: 1px solid rgba(23,70,108,0.1);
+            display: grid;
+            place-items: center;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--deep-blue);
+            box-shadow: 0 8px 18px rgba(23,70,108,0.08);
+            opacity: 0.95;
+            pointer-events: none;
+        }
+
+        ul {
+            padding-left: 1.3rem;
+        }
+
+        .story-block {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(149, 208, 237, 0.32);
+            border-radius: 24px;
+            padding: 1.4rem 1.5rem;
+            box-shadow: 0 20px 40px rgba(53, 94, 119, 0.08);
+            display: grid;
+            gap: 1rem;
+            line-height: 1.75;
+            color: var(--text);
+        }
+
+        .story-block p {
+            margin: 0;
+            background: rgba(242, 154, 160, 0.08);
+            border-radius: 16px;
+            padding: 1rem 1.15rem;
+            border: 1px solid rgba(242, 154, 160, 0.15);
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, rgba(255, 242, 213, 0.95), rgba(255, 248, 236, 0.97));
+            border-left: 5px solid var(--mustard);
+            padding: 1rem 1.1rem;
+            border-radius: 18px;
+            font-weight: 600;
+            box-shadow: inset 0 0 0 1px rgba(238, 203, 121, 0.2);
+            animation: float 3.6s ease-in-out infinite;
+            margin-top: 0.7rem;
+        }
+
+        #leitfaden ul {
+            list-style: none;
+            padding-left: 1.2rem;
+            margin: 0.9rem 0 0;
+        }
+
+        #leitfaden li {
+            position: relative;
+            padding-left: 1.8rem;
+            margin-bottom: 0.85rem;
+            line-height: 1.6;
+        }
+
+        #leitfaden li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0.1rem;
+            color: var(--mint);
+            font-weight: 700;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section[id] {
+            scroll-margin-top: 110px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        footer {
+            background: linear-gradient(135deg, #153b57 0%, #215d83 100%);
+            color: #f9fbff;
+            padding: 2rem 1.5rem 2.6rem;
+            margin-top: 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .footer-inner a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 0.8rem;
+        }
+
+        @media (max-width: 860px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-shell {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .brand {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 700px) {
+            header {
+                clip-path: none;
+                padding-bottom: 2.5rem;
+            }
+
+            nav {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a class="skip-link" href="#ausgangssituation">Direkt zum Inhalt</a>
+    <header>
+        <div class="hero-shell">
+            <div>
+                <div class="brand">
+                    <div class="brand-mark">🌈</div>
+                    <div class="brand-text">ADHS & Stärken</div>
+                </div>
+                <div class="hero-badge">✨ Unterstützung für Kita, Schule und Zuhause</div>
+                <h1>Wie lässt sich Mia im Kindergarten und in der Schule helfen?</h1>
+                <p class="intro">
+                    Diese Seite zeigt, wie Kinder mit auffälligem Verhalten im Alltag sinnvoll begleitet werden können – mit Fokus auf Struktur, Förderung und individuelle Unterstützung im Beispiel von Mia.
+                </p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="#auffaelligkeiten">▶ Mehr erfahren</a>
+                    <a class="btn btn-secondary" href="#leitfaden">📘 Leitfaden ansehen</a>
+                </div>
+            </div>
+            <div class="hero-illustration">
+                <div class="illustration-card">
+                    <div class="row"><span class="dot" style="background:#ff6f61"></span><strong>Unterstützung</strong></div>
+                    <div class="row"><span class="icon">☁️</span><span>Fröhlich, klar und liebevoll begleiten</span></div>
+                    <div class="row"><span class="icon">🌼</span><span>Struktur schafft Sicherheit</span></div>
+                    <div class="row"><span class="icon">💛</span><span>Stärken sichtbar machen</span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <h2>Themenübersicht</h2>
+        <ul>
+            <li><a href="#ausgangssituation">Ausgangssituation</a></li>
+            <li><a href="#video">Video</a></li>
+            <li><a href="#auffaelligkeiten">Mias Auffälligkeiten</a></li>
+            <li><a href="#handlungsmethoden">pädagogische Handlungsmöglichkeiten</a></li>
+            <li><a href="#bezug-zu-mia">Handlungsmöglichkeiten im Bezug auf Mia</a></li>
+            <li><a href="#leitfaden">Beispiel für einen Leitfaden</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <article id="ausgangssituation" class="reveal">
+            <div class="section-heading">
+                <h2>Ausgangssituation</h2>
+                <a class="section-link" href="#ausgangssituation" title="Link kopieren">#</a>
+            </div>
+            <div class="story-block">
+                <p>Mia ist 5 Jahre alt und besucht seit drei Jahren eine Kindertagesstätte. Nach den Sommerferien wird sie eingeschult. Sowohl in der Kita als auch bei den zukünftigen Lehrkräften fallen immer wieder ähnliche Verhaltensweisen auf. In der Kita hat Mia häufig Schwierigkeiten, längere Zeit ruhig an einer Aktivität teilzunehmen. Während des Morgenkreises rutscht sie auf ihrem Stuhl hin und her, unterbricht andere Kinder oder steht plötzlich auf. Bei Bastelangeboten beginnt sie motiviert, verliert aber schnell die Konzentration und wechselt oft zu anderen Materialien. Im Freispiel kommt es regelmäßig zu Konflikten, weil Mia anderen Kindern Spielsachen wegnimmt oder impulsiv reagiert, wenn etwas nicht nach ihren Vorstellungen läuft. Die Erzieherinnen beobachten jedoch auch viele Stärken: Mia ist sehr kreativ, bewegt sich gerne und begeistert andere Kinder mit ihren Ideen. Besonders bei Bewegungsangeboten oder kleinen Gruppenarbeiten arbeitet sie konzentrierter und zeigt viel Freude. Im Gespräch mit Mias Eltern erfahren die Fachkräfte, dass Mia zuhause nur schwer zur Ruhe kommt und oft erst spät einschläft. Morgens ist sie häufig müde. Außerdem nutzt sie täglich über längere Zeit das Tablet. Die Mutter berichtet, dass sie selbst als Kind große Probleme hatte, sich in der Schule zu konzentrieren. Bei einem Besuch in der Grundschule lernt Mia ihre zukünftige Klassenlehrerin Frau Berger kennen. Während einer Unterrichtshospitation fällt auf, dass Mia schnell durch Geräusche oder Bewegungen im Klassenraum abgelenkt wird. Gleichzeitig meldet sie sich häufig impulsiv und ruft Antworten hinein, ohne abzuwarten. Die Erzieherinnen und die Lehrkraft möchten nun gemeinsam überlegen, wie Mia beim Übergang von der Kita in die Schule unterstützt werden kann, damit sie positive Lernerfahrungen macht und sich angenommen fühlt.</p>
+            </div>
+        </article>
+
+        <article id="video" class="reveal">
+            <div class="section-heading">
+                <h2>Video zur Situation</h2>
+                <a class="section-link" href="#video" title="Link kopieren">#</a>
+            </div>
+            <div class="video-card">
+                <h3>Erklärungsvideo zu Mias Ausgangssituation</h3>
+                <video controls>
+                    <source src="file:///C:/Users/kunde/Downloads/6450b492-72aa-43ac-878d-fbd4c9b501b3.mp4" type="video/mp4">
+                    Ihr Browser unterstützt das Video-Format nicht.
+                </video>
+                <p>Falls das Video nicht geladen wird, verwenden Sie am besten den lokal gespeicherten Pfad.</p>
+            </div>
+        </article>
+
+        <article id="auffaelligkeiten" class="reveal">
+            <div class="section-heading">
+                <h2>Mias Auffälligkeiten</h2>
+                <a class="section-link" href="#auffaelligkeiten" title="Link kopieren">#</a>
+            </div>
+            <div class="grid">
+                <section class="card">
+                    <div class="card-top">
+                        <span class="card-note">Stärken sichtbar</span>
+                        <div class="card-dots">
+                            <span class="card-dot rose"></span>
+                            <span class="card-dot mint"></span>
+                            <span class="card-dot mustard"></span>
+                        </div>
+                    </div>
+                    <h3><span class="section-icon">🌟</span>Positive Auffälligkeiten</h3>
+                    <p>
+                        Mia wirkt im Kindergarten oft sehr kreativ und teilt ihre Ideen gerne mit anderen Kindern. Zudem zeigt sie Freude am Lernen und Spielen, wobei eine erhöhte Konzentrationsleistung deutlich beim Arbeiten in kleineren Gruppen und Bewegungsangeboten wahrzunehmen ist. dies lässt sich zum Beispiel mithilfe iherer Begeisterung zur Bewegung erklären und herleiten.  
+                    </p>
+                    <p>
+                        Auch in der Schule gibt es positive Merkmale des Verhalten von Mia. Dazu zählt das Zeigen ihrer Interesse und der breitschaft Antworten zu geben, welches sich durch das häufige Melden und der Beteiligung im Unterricht zeigt
+                    </p>
+                </section>
+                <section class="card">
+                    <div class="card-top">
+                        <span class="card-note">Wichtige Hinweise</span>
+                        <div class="card-dots">
+                            <span class="card-dot rose"></span>
+                            <span class="card-dot mint"></span>
+                            <span class="card-dot mustard"></span>
+                        </div>
+                    </div>
+                    <h3><span class="section-icon">⚠️</span>Negative Auffälligkeiten</h3>
+                    <p>
+                        Gleichzeitig fällt im Kindergarten auf, dass Mia Schwierigkeiten hat länger ruhig sitzen zu bleiben und schnell die Konzentrationsleistung abnimmt. Außerdem wechselt sie des Öfteren aus dem Grundn ihre Beschäftigung: Eine weitere Auffälligkeit ist zudem ihre Impulsivität, welche sich durch das wegnehmen der Spielsachen andere kinder, das Unterbrechen und der öfteren Konflikte äußert.
+                    </p>
+                    <p>
+                        Auch in der Schule ist diese Schwierigkeit der Impulskontrolle zu erkennen, da sie oftmals Antworten hineinruft, ohne sich zu melden. Zudem ist die Problematik der gezielten Aufmerksamketssteuuerung erkennbar, da Mia häufig schnell durch geräusche und Bewegungen abgelenkt wird.
+                    </p>
+                </section>
+            </div>
+        </article>
+
+        <article id="handlungsmethoden" class="reveal">
+            <div class="section-heading">
+                <h2>pädagogische Handlungsmöglichkeiten</h2>
+                <a class="section-link" href="#handlungsmethoden" title="Link kopieren">#</a>
+            </div>
+            <div class="grid">
+                <section class="card">
+                    <div class="card-top">
+                        <span class="card-note">ruhige Strukturen</span>
+                        <div class="card-dots">
+                            <span class="card-dot rose"></span>
+                            <span class="card-dot mint"></span>
+                            <span class="card-dot mustard"></span>
+                        </div>
+                    </div>
+                    <h3><span class="section-icon">🏫</span>Handlungsmöglichkeiten in der Kita</h3>
+                    <ul>
+                        <li>
+                            eine klare und kommunizierte Tagesstruktur mit festen Abläufenund Ritualen
+                        </li>
+                        <li>
+                            eine ruhige und reizarme Umgebung anbieten
+                        </li>
+                        <li>
+                            kleinere Gruppen bilden
+                        </li>
+                        <li>
+                            regelmäßige Bewegungsangebote in den Alltag integrieren
+                        </li>
+                        <li>
+                            kurze und verständliche Anweisungen geben
+                        </li>
+                        <li>
+                            eine vertrauensvolle Beziehung aufbauen und positive Verhaltensweisen direkt loben
+                        </li>
+                    </ul>
+                </section>
+                <section class="card">
+                    <div class="card-top">
+                        <span class="card-note">klare Begleitung</span>
+                        <div class="card-dots">
+                            <span class="card-dot rose"></span>
+                            <span class="card-dot mint"></span>
+                            <span class="card-dot mustard"></span>
+                        </div>
+                    </div>
+                    <h3><span class="section-icon">📚</span>Handlungsmöglichkeiten in der Schule</h3>
+                    <ul>
+                        <li>
+                            Sitzplatz vorne in der Nähe der Lehrkraft wählen
+                        </li>
+                        <li>
+                            kurze und einfache Arbeitsaufträge formulieren und geben
+                        </li>
+                        <li>
+                            Statt häufiger Ermahnung mehr mit Blickkontakt und Handzeicchen erinnern
+                        </li>
+                        <li>
+                            Bewegungspausen und flexible Sitzmöglichkeiten ermöglichen
+                        </li>
+                        <li>
+                            konzentriertes Arbeiten regelmäßig loben
+                        </li>
+                        <li>
+                            im engen Austausch mit den Eltern stehen
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </article>
+
+        <article id="bezug-zu-mia" class="reveal">
+            <div class="section-heading">
+                <h2>Handlungsmöglichkeiten im Bezug auf Mia</h2>
+                <a class="section-link" href="#bezug-zu-mia" title="Link kopieren">#</a>
+            </div>
+            <p>
+                Mia profitiert besonders von einer klaren Struktur, da diese ihr Sicherheit und Orientierung im Alltag gibt. ZUdem ist es von Bedeutung Mias Motivation aufrecht zu erhalten, indem sie Lob und positive Rückmeldung erhält, da es ihr Selbstbewusstsein erheblich steigern kann. Neben einer ruhigen Umgebung, welche für eine erhöhte konzentrationsleistung bei Mia führen kann, benötigt sie ebenfalls Bewegungspausen, sodass ihr Bewegungsdrang ausgeglichen wird und ihre Aufmerksamkeit danach wieder auf die Aufgaben gerichtet werden kann. Außerdem sind kurze Auftrtäge und Anweisungen für Mia besser umzustezen, da das Arbeitsgedächtnis dadurch nicht überfordert wird. Um ihre Aufmerksamkeitslenkungsschwierigkeiten zu kompensieren, ist es für Mia besser in der Nähe der Lehrkraft zu sitzen, sodass ebenfalls eine schnelle Unterstützung ermöglicht wird. Des Weiteren kann eine klare und regelmäßige Kommunikation mit den Eltern daszu führen, dass Mia zuhause und in der Schule ähnlich unterstützt wird.
+            </p>
+            <div class="highlight">
+                Wichtig ist Mia zu unterstützen und mit Empathie auf sie zu wirken, da sie selbst mit ihren Gefühlen und Gedanken überfordert sein kann.
+            </div>
+        </article>
+
+        <article id="leitfaden" class="reveal">
+            <div class="section-heading">
+                <h2>Beispiel für einen Leitfaden</h2>
+                <a class="section-link" href="#leitfaden" title="Link kopieren">#</a>
+            </div>
+            <ul>
+                <li>Feste Tagesabläufe und Rituale</li>
+                <li>Klare, kurze Anweisungen geben.</li>
+                <li>Ruhige Umgebung</li>
+                <li>Viel Lob für positives Verhalten</li>
+                <li>regelmäßige Bewegungspausen anbeiten</li>
+                <li>kleiner gruppen erstellen</li>
+                <li>Gute Zusammenarbeit zwischen Eltern, Kita und Schule</li>
+            </ul>
+            <p>
+                Mia soll sich wohlfühlen, ihre Stärken nutzen und sich dieser bewusst sein, sowie mit Freude lernen können.
+            </p>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div>💛 Für eine wertschätzende Begleitung von Kindern und Jugendlichen</div>
+            <div>
+                <a href="#auffaelligkeiten">Start</a>
+                <a href="#leitfaden">Leitfaden</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach((section) => observer.observe(section));
+
+        const links = document.querySelectorAll('nav a');
+        const sections = document.querySelectorAll('article[id]');
+
+        const setActiveLink = () => {
+            let current = '';
+            sections.forEach((section) => {
+                const top = section.offsetTop - 120;
+                if (window.scrollY >= top) {
+                    current = section.id;
+                }
+            });
+
+            links.forEach((link) => {
+                link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+            });
+        };
+
+        window.addEventListener('scroll', setActiveLink);
+        window.addEventListener('load', setActiveLink);
+    </script>
+</body>
+</html>
